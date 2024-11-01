@@ -1,11 +1,3 @@
-# Welcome to your Jupyter Book
+# Mastering Deep Learning: From Neural Networks to Transformers
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
-
-Check out the content pages bundled with this sample book to see more.
-
-```{tableofcontents}
-```
+By the end of this book, you will be familiar with core concepts in neural networks, ranging from training simple models to implementing advanced architectures. Whether you are a beginner looking to get started or someone seeking deeper insights, I hope this resource supports your journey through the fascinating world of deep learning.
