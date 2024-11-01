@@ -2,8 +2,8 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: intro
+root: chapters/intro
 chapters:
-- file: index
-- file: ch1
-- file: ch2
+- file: chapters/index
+- file: chapters/ch1
+- file: chapters/ch2
