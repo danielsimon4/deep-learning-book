@@ -1,0 +1,932 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chapter 1: Neural Networks &#8212; Mastering Deep Learning: From Neural Networks to Transformers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/ch1';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Chapter 2: Bigram Model" href="ch2.html" />
+    <link rel="prev" title="Index" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Mastering Deep Learning: From Neural Networks to Transformers - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Mastering Deep Learning: From Neural Networks to Transformers - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Index</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 1: Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch2.html">Chapter 2: Bigram Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/danielsimon4/deep-learning-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/chapters/ch1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 1: Neural Networks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning">1.1 Deep Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks">1.2 Neural Networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neurons">1.3 Neurons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch">1.4 PyTorch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-how-neural-networks-learn">1.5 Understanding How Neural Networks Learn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-pass">1.6 Forward Pass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">1.7 Loss Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-squared-error-mse">1.8 Mean Squared Error (MSE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation">1.9 Backpropagation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-parameters">1.10 Update Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent">1.11 Gradient Descent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-network-training">1.11 Neural Network Training</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-1-neural-networks">
+<h1>Chapter 1: Neural Networks<a class="headerlink" href="#chapter-1-neural-networks" title="Link to this heading">#</a></h1>
+<br>
+<section id="deep-learning">
+<span id="id1"></span><h2>1.1 Deep Learning<a class="headerlink" href="#deep-learning" title="Link to this heading">#</a></h2>
+<p><strong>Artificial Intelligence (AI)</strong> is a branch of computer science focused on creating systems that perform tasks requiring <strong>human-like intelligence</strong>, such as language comprehension, pattern recognition, problem-solving, and decision-making. AI aims to enable machines to perform complex tasks in ways that mimic human reasoning and adaptability.</p>
+<p><strong>Machine Learning (ML)</strong> is a subset of AI that involves <strong>training algorithms on data</strong> to identify patterns and make predictions. ML models learn from data and improve their accuracy over time, typically using one of three main approaches:</p>
+<ul class="simple">
+<li><p><strong>Supervised Learning</strong>: The model is trained on labeled data, where each input is paired with a known output. The model learns to associate inputs with outputs, making it well-suited for tasks such as classification (e.g., image recognition) and regression (e.g., predicting prices).</p></li>
+<li><p><strong>Unsupervised Learning</strong>: The model is trained on unlabeled data, without predefined outputs. This approach is used to discover hidden patterns or groupings within the data, commonly applied in clustering and association tasks.</p></li>
+<li><p><strong>Reinforcement Learning</strong>: The model learns through feedback from rewards and penalties based on its actions. Reinforcement learning is often applied in environments where decision-making is complex, such as strategic games (e.g., chess) and robotics, where learning occurs via trial and error.</p></li>
+</ul>
+<p><strong>Deep Learning (DL)</strong> is a specialized area within ML that uses <strong>neural networks</strong> to recognize complex patterns in large datasets.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/deep-learning.png"><img alt="../_images/deep-learning.png" src="../_images/deep-learning.png" style="width: 140px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Deep Learning Overview</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<br>
+</section>
+<section id="neural-networks">
+<span id="id3"></span><h2>1.2 Neural Networks<a class="headerlink" href="#neural-networks" title="Link to this heading">#</a></h2>
+<p><strong>Neural networks</strong> are computational models inspired by the structure of the human brain, designed to recognize patterns and make predictions. They consist of <strong>layers of interconnected nodes</strong> (often called neurons) that process information through mathematical operations.</p>
+<p>A basic neural network has the following structure:</p>
+<ul class="simple">
+<li><p><strong>Input Layer</strong>: This first layer receives raw data, like images, text, or numerical values. Each node in this layer represents an <strong>input feature</strong>.</p></li>
+<li><p><strong>Hidden Layers</strong>: These intermediate layers between the input and output layers <strong>process information</strong>. Each hidden layer transforms data from the previous layer, allowing the network to progressively learn and recognize patterns.</p></li>
+<li><p><strong>Output Layer</strong>: This final layer provides the network’s <strong>output</strong>, such as classifying an image or predicting a value.</p></li>
+</ul>
+<figure class="align-default" id="neural-network">
+<a class="reference internal image-reference" href="../_images/neural-network.png"><img alt="../_images/neural-network.png" src="../_images/neural-network.png" style="width: 340px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Basic Structure of a Neural Network</span><a class="headerlink" href="#neural-network" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<br>
+</section>
+<section id="neurons">
+<span id="id4"></span><h2>1.3 Neurons<a class="headerlink" href="#neurons" title="Link to this heading">#</a></h2>
+<p>In a neural network, each <strong>neuron</strong> is a fundamental unit that takes in <strong>multiple inputs</strong> and processes them to produce a <strong>single output</strong>. As shown in <a class="reference internal" href="#neural-network"><span class="std std-ref"><em>Fig. 2 Basic Structure of a Neural Network</em></span></a>, each neuron in the hidden and output layers connects to all the neurons in the previous layer. These connections have associated values known as <strong>weights</strong> that represent the strength of the connection between the neurons.</p>
+<p>When an input reaches a neuron, it is multiplied by the weight of its connection, and the results are combined (summed up). An additional value, called a <strong>bias</strong> (b), may be added to adjust the sum. The result may also be passed through an <strong>activation function</strong> (σ), which determines the neuron’s output by introducing non-linearity.</p>
+<figure class="align-default" id="neuron">
+<a class="reference internal image-reference" href="../_images/neuron.png"><img alt="../_images/neuron.png" src="../_images/neuron.png" style="width: 250px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Structure of a Neuron</span><a class="headerlink" href="#neuron" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<br>
+<p>The output of the above neuron would be:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{output} = \sigma\left(w_{1}x_{1} + w_{2}x_{2} + w_{3}x_{3} + b\right)
+\]</div>
+<p>Thus, in general, the output of a neuron can be expressed as:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{output} = \sigma\left(Σ_{j} w_{j} x_{j} + b\right)
+\]</div>
+<p>Using matrix multiplication, the above expression can be represented as:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{output} = \sigma({w} \cdot {x} + b)
+\]</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The output of the above neuron would be one of the inputs for the neurons in the next layer, and so on, allowing the neural network to learn complex patterns in the data through layers of transformations.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that a larger weight indicates a stronger connection between the neurons, while the bias term allows the activation of a neuron to be adjusted independently of its inputs, enabling the model to better fit the training data and capture more complex patterns.</p>
+</div>
+<br>
+</section>
+<section id="pytorch">
+<span id="id5"></span><h2>1.4 PyTorch<a class="headerlink" href="#pytorch" title="Link to this heading">#</a></h2>
+<p>We will use <strong>PyTorch</strong> to build our neural networks. PyTorch is an open-source machine learning library widely used for building and training deep learning models due to its flexibility, ease of use, and efficient computation. It provides multi-dimensional arrays, known as <strong>tensors</strong>, which are similar to NumPy arrays but optimized for GPU processing. Depending on their dimensions, we will refer to the tensors differently.</p>
+<p>A 1-dimensional tensor is called a <strong>vector</strong>. A vector with shape (3) would look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>A 2-dimensional tensor is called a <strong>matrix</strong>: A matrix with shape (2, 3) would look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>A tensor with 3 or more dimensions is called an <strong>n-dimensional tensor</strong>. A 3D tensor with shape (2, 2, 3) would look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tensor</span><span class="p">([[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+         <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span>
+        <span class="p">[[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
+         <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]]])</span>
+</pre></div>
+</div>
+<p>The following code will set up the environment for working with PyTorch:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import PyTorch library</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="c1"># set print options to avoid scientific notation</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">sci_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+</section>
+<section id="understanding-how-neural-networks-learn">
+<span id="id6"></span><h2>1.5 Understanding How Neural Networks Learn<a class="headerlink" href="#understanding-how-neural-networks-learn" title="Link to this heading">#</a></h2>
+<p>Neural networks use supervised learning to <strong>fine-tune their parameters</strong>. In other words, neural networks learn by adjusting thier weights and biases through an iterative process that involves four key steps:</p>
+<ol class="arabic simple">
+<li><p><strong>Forward pass</strong>: The input data flows through the network layer by layer, producing an output.</p></li>
+<li><p><strong>Loss Function</strong>: The network’s output is compared to the actual values, and a loss function (like MSE or Cross-Entropy) is used to measure the prediction error.</p></li>
+<li><p><strong>Backpropagation</strong>: The network calculates gradients by propagating the error backward through the layers, determining how much each parameter contributed to the error.</p></li>
+<li><p><strong>Update Parameters</strong>: The calculated gradients are used to adjust the weights and biases through an optimization algorithm (like Gradient Descent, SGD, or Adam) to minimize the loss function.</p></li>
+</ol>
+<br>
+</section>
+<section id="forward-pass">
+<span id="id7"></span><h2>1.6 Forward Pass<a class="headerlink" href="#forward-pass" title="Link to this heading">#</a></h2>
+<p>We will implement a <strong>forward pass</strong> using 5 input examples for the neural network illustrated in <a class="reference internal" href="#neural-network"><span class="std std-ref"><em>Fig. 2 Basic Structure of a Neural Network</em></span></a>. This network had 3 input features, 2 hidden layers with 6 neurons each, and 2 output neurons.</p>
+<p>We will first initialize the network parameters. For simplicity, we will not include any bias or activation functions at this stage.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">torch.randn</span></code> function generates a tensor filled with random numbers drawn from a standard normal distribution (mean = 0, standard deviation = 1). For more information, please refer to the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.randn.html">PyTorch documentation</a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">requires_grad=True</span></code> argument indicates that the tensor should track gradients for operations. This will enable to run <code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code> during backpropagation.</p></li>
+</ul>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># seed the random number generator for reproducibility</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Generator</span><span class="p">()</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># intitialize randomly weight matrices</span>
+<span class="n">W1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>   <span class="c1"># (input_to_layer, output_from_layer)</span>
+<span class="n">W2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>   <span class="c1"># (input_to_layer, output_from_layer)</span>
+
+<span class="c1"># list of parameters</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="n">W1</span><span class="p">,</span> <span class="n">W2</span><span class="p">]</span>
+
+<span class="c1"># track gradients</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># print total number of parameters</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of parameters: </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">nelement</span><span class="p">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">parameters</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of parameters: 30
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once the network parameters have beeen intialized, we can perform a forward pass. Please note that <strong>matrix multiplication</strong> allows us to efficiently evaluate the output for the 5 input examples in parallel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># seed the random number generator for reproducibility</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Generator</span><span class="p">()</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># intitialize randomly 5 input examples</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">generator</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>    <span class="c1"># (num_examples, input_features)</span>
+
+<span class="c1"># matrix multiplication</span>
+<span class="n">h1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">W1</span>     <span class="c1"># (5,6) = (5,3) x (3,6)</span>
+<span class="n">h2</span> <span class="o">=</span> <span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span>    <span class="c1"># (5,2) = (5,6) x (6,2)</span>
+
+<span class="c1"># clone for later comparison </span>
+<span class="n">old_h2</span> <span class="o">=</span> <span class="n">h2</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+
+<span class="c1"># print input and output matrices</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input:</span><span class="se">\n</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output:</span><span class="se">\n</span><span class="si">{</span><span class="n">h2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Input:
+tensor([[ 0.6614,  0.2669,  0.0617],
+        [ 0.6213, -0.4519, -0.1661],
+        [-1.5228,  0.3817, -1.0276],
+        [-0.5631, -0.8923, -0.0583],
+        [-0.1955, -0.9656,  0.4224]])
+
+Output:
+tensor([[ 1.0329, -1.2264],
+        [ 2.3319,  2.0953],
+        [-2.8955, -3.1665],
+        [ 0.1669,  4.3554],
+        [ 0.5632,  5.2940]], grad_fn=&lt;MmBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+</section>
+<section id="loss-function">
+<span id="id8"></span><h2>1.7 Loss Function<a class="headerlink" href="#loss-function" title="Link to this heading">#</a></h2>
+<p>A <strong>loss function</strong> is a mathematical representation that quantifies how well a machine learning model is performing. It measures the difference between the model’s predicted outputs and the actual outputs from the dataset (the <strong>targets</strong>).</p>
+<p>There are various types of loss functions, each suitable for different tasks:</p>
+<ul class="simple">
+<li><p>Regression Tasks: Mean Squared Error (MSE) and Mean Absolute Error (MAE) (both covered in section <a class="reference internal" href="#id9"><span class="std std-ref">1.8 Mean Squared Error (MSE)</span></a>).</p></li>
+<li><p>Classification Tasks: Cross-Entropy Loss (covered in <a class="reference internal" href="#2.7"><code class="xref myst docutils literal notranslate"><span class="pre">2.7</span></code></a>) and Hinge Loss.</p></li>
+</ul>
+<br>
+</section>
+<section id="mean-squared-error-mse">
+<span id="id9"></span><h2>1.8 Mean Squared Error (MSE)<a class="headerlink" href="#mean-squared-error-mse" title="Link to this heading">#</a></h2>
+<p>The <strong>Mean Squared Error (MSE)</strong> is a commonly used loss function for regression tasks, where the objective is to predict continuous values. MSE computes the average of the squared differences between the predicted values (<span class="math notranslate nohighlight">\(\hat{y}_i\)</span>) and actual values(<span class="math notranslate nohighlight">\(y_i\)</span>). The squaring of the errors results in larger penalties for bigger discrepancies, making MSE particularly sensitive to outliers compared to the <strong>Mean Absolute Error (MAE)</strong>, which treats all errors equally.</p>
+<p>The formulas for MSE and MAE are as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|
+\]</div>
+<p>We will first define the following targets, which are the values to which the neural network’s output should converge.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">targets</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">1.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.3</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">5.3</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Targets:</span><span class="se">\n</span><span class="si">{</span><span class="n">targets</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Targets:
+tensor([[ 1.1000, -1.3000],
+        [ 2.3000,  2.0000],
+        [-2.5000, -3.2000],
+        [ 0.2000,  4.3000],
+        [ 0.6000,  5.3000]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will then calculate the loss using the Mean Squared Error.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">tensor.item()</span></code> method returns the value of a single-element tensor. For more information, please refer to the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.Tensor.item.html">PyTorch documentation</a>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate loss using MSE</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="p">((</span><span class="n">h2</span> <span class="o">-</span> <span class="n">targets</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loss: 0.0183
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+</section>
+<section id="backpropagation">
+<span id="id10"></span><h2>1.9 Backpropagation<a class="headerlink" href="#backpropagation" title="Link to this heading">#</a></h2>
+<p>During <strong>backpropagation</strong>, the neural network computes the <strong>gradient of the loss function</strong> with respect to all its parameters by applying the chain rule of calculus.</p>
+<p>To compute all the gradients, we will use the PyTorch function <code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code> which kept track of all the operations during the forwards pass. In  <a class="reference internal" href="#ch3.ipynb"><code class="xref myst docutils literal notranslate"><span class="pre">ch3.ipynb</span></code></a> we will perform a backward pass manually to better understand how backpropagation works and how the gradients are calculated.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set the gradients to None</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># calculate gradients</span>
+<span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<br>
+</section>
+<section id="update-parameters">
+<span id="id11"></span><h2>1.10 Update Parameters<a class="headerlink" href="#update-parameters" title="Link to this heading">#</a></h2>
+<p>Once the gradients have been computed, the neural network progresively <strong>updates its parameters</strong> trying minimize the loss function. The most common optimization techniques for updating the parameters are <strong>gradient descent</strong>, <strong>stochastic gradient descent (SGD)</strong>, and <strong>Adam</strong>.</p>
+<p>A <strong>gradient</strong> is a vector that represents the rate of change of a function with respect to its input variables. By default, gradients point in the <strong>direction of steepest ascent</strong>, that is, the direction in which the function increases the fastest. Since we want to minimize the loss function, we will move in the opposite direction of the gradients.</p>
+<br>
+</section>
+<section id="gradient-descent">
+<span id="id12"></span><h2>1.11 Gradient Descent<a class="headerlink" href="#gradient-descent" title="Link to this heading">#</a></h2>
+<p><strong>Gradient descent</strong> is an optimization algorithm used to minimize a function, frequently used in neural networks training to minimize the loss function.</p>
+<p>Gradient descent updates each parameter by subtracting a fraction of the gradient from its current value, scaled by a factor known as the <strong>learning rate</strong>. The learning rate determines the size of the steps we take towards the minimum. A smaller learning rate results in more precise but slower convergence, while a larger learning rate can speed up convergence but may risk overshooting the minimum. The parameter update rule for gradient descent can be expressed mathematically as:</p>
+<div class="math notranslate nohighlight">
+\[
+\theta = \theta - \eta \nabla L(\theta)
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\theta\)</span> represents the parameters of the neural network</p></li>
+<li><p><span class="math notranslate nohighlight">\(\eta\)</span> is the learning rate</p></li>
+<li><p><span class="math notranslate nohighlight">\(\nabla L(\theta)\)</span> is the gradient of the loss function with respect to the parameters.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># learning rate</span>
+
+<span class="c1"># clone for later comparison </span>
+<span class="n">old_W1</span> <span class="o">=</span> <span class="n">W1</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+<span class="n">old_W2</span> <span class="o">=</span> <span class="n">W2</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+
+<span class="c1"># update parameters using gradient descent</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">data</span> <span class="o">+=</span> <span class="o">-</span><span class="n">lr</span> <span class="o">*</span> <span class="n">p</span><span class="o">.</span><span class="n">grad</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;W1 before GD:</span><span class="se">\n</span><span class="si">{</span><span class="n">old_W1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;W1 gradients:</span><span class="se">\n</span><span class="si">{</span><span class="n">W1</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;W1 after GD:</span><span class="se">\n</span><span class="si">{</span><span class="n">W1</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;W2 before GD:</span><span class="se">\n</span><span class="si">{</span><span class="n">old_W2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;W2 gradients:</span><span class="se">\n</span><span class="si">{</span><span class="n">W2</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;W2 after GD2:</span><span class="se">\n</span><span class="si">{</span><span class="n">W2</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>W1 before GD:
+tensor([[-1.5256, -0.7502,  0.6995,  0.1991,  0.8657,  0.2444],
+        [-0.6629,  0.8073,  0.4391,  1.1712, -2.2456, -1.4465],
+        [ 0.0612, -0.6177, -0.7981, -0.1316, -0.7984,  0.3357]])
+W1 gradients:
+tensor([[ 0.0536, -0.0771,  0.2550,  0.1593,  0.0444,  0.2188],
+        [-0.0216,  0.0368, -0.0499, -0.0180, -0.0137, -0.0411],
+        [ 0.0185, -0.0187,  0.1620,  0.1197,  0.0213,  0.1415]])
+W1 after GD:
+tensor([[-1.5310, -0.7425,  0.6740,  0.1832,  0.8613,  0.2225],
+        [-0.6608,  0.8036,  0.4441,  1.1730, -2.2442, -1.4423],
+        [ 0.0593, -0.6159, -0.8143, -0.1436, -0.8006,  0.3216]])
+
+W2 before GD:
+tensor([[ 0.3935,  1.1322],
+        [-0.5404, -2.2102],
+        [ 2.1130, -0.0040],
+        [ 1.3800, -1.3505],
+        [ 0.3455,  0.5046],
+        [ 1.8213, -0.1814]])
+W2 gradients:
+tensor([[-0.1637, -0.0016],
+        [-0.1570, -0.0064],
+        [ 0.0129,  0.0072],
+        [-0.0138, -0.0103],
+        [ 0.0964,  0.0373],
+        [ 0.0894,  0.0136]])
+W2 after GD2:
+tensor([[ 0.4099,  1.1324],
+        [-0.5247, -2.2096],
+        [ 2.1117, -0.0047],
+        [ 1.3814, -1.3495],
+        [ 0.3358,  0.5009],
+        [ 1.8124, -0.1828]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that the gradients indicate whether the values should be increased or decreased, as well as the magnitude of the adjustment.</p>
+</div>
+<br>
+</section>
+<section id="neural-network-training">
+<span id="id13"></span><h2>1.11 Neural Network Training<a class="headerlink" href="#neural-network-training" title="Link to this heading">#</a></h2>
+<p>During <strong>training</strong>, a neural network iteratively makes a forward pass, calcules the loss, makes a backward pass and updates its parameters. Each iteration is usually called a <strong>training step</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">max_steps</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># learning rate</span>
+
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_steps</span><span class="p">):</span>
+
+    <span class="c1"># forward pass</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">W1</span>     <span class="c1"># (5,6) = (5,3) x (3,6)</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="n">h1</span> <span class="o">@</span> <span class="n">W2</span>    <span class="c1"># (5,2) = (5,6) x (6,2)</span>
+
+    <span class="c1"># calculate loss</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="p">((</span><span class="n">h2</span> <span class="o">-</span> <span class="n">targets</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="c1"># set the gradients to 0</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># calculate gradients</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+    <span class="c1"># update parameters</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">data</span> <span class="o">+=</span> <span class="o">-</span><span class="n">lr</span> <span class="o">*</span> <span class="n">p</span><span class="o">.</span><span class="n">grad</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step: </span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">max_steps</span><span class="si">}</span><span class="s2">   Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Step:  0 / 15   Loss: 0.0062
+Step:  1 / 15   Loss: 0.0054
+Step:  2 / 15   Loss: 0.0051
+Step:  3 / 15   Loss: 0.0049
+Step:  4 / 15   Loss: 0.0047
+Step:  5 / 15   Loss: 0.0045
+Step:  6 / 15   Loss: 0.0044
+Step:  7 / 15   Loss: 0.0043
+Step:  8 / 15   Loss: 0.0042
+Step:  9 / 15   Loss: 0.0041
+Step: 10 / 15   Loss: 0.0040
+Step: 11 / 15   Loss: 0.0040
+Step: 12 / 15   Loss: 0.0039
+Step: 13 / 15   Loss: 0.0039
+Step: 14 / 15   Loss: 0.0039
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see, through gradient descent, the neural network gradually reduced its loss and improved its predictions over time. Comparing the initial output to the final output, we can observe that the final predictions are closer to the target values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial output:</span><span class="se">\n</span><span class="si">{</span><span class="n">old_h2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final output:</span><span class="se">\n</span><span class="si">{</span><span class="n">h2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Targets:</span><span class="se">\n</span><span class="si">{</span><span class="n">targets</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initial output:
+tensor([[ 1.0329, -1.2264],
+        [ 2.3319,  2.0953],
+        [-2.8955, -3.1665],
+        [ 0.1669,  4.3554],
+        [ 0.5632,  5.2940]])
+Final output:
+tensor([[ 0.9563, -1.2406],
+        [ 2.2978,  2.0103],
+        [-2.5604, -3.1827],
+        [ 0.2316,  4.3254],
+        [ 0.5060,  5.2981]], grad_fn=&lt;MmBackward0&gt;)
+Targets:
+tensor([[ 1.1000, -1.3000],
+        [ 2.3000,  2.0000],
+        [-2.5000, -3.2000],
+        [ 0.2000,  4.3000],
+        [ 0.6000,  5.3000]])
+</pre></div>
+</div>
+</div>
+</div>
+<br></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Index</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ch2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 2: Bigram Model</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning">1.1 Deep Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks">1.2 Neural Networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neurons">1.3 Neurons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch">1.4 PyTorch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-how-neural-networks-learn">1.5 Understanding How Neural Networks Learn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-pass">1.6 Forward Pass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">1.7 Loss Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-squared-error-mse">1.8 Mean Squared Error (MSE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation">1.9 Backpropagation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-parameters">1.10 Update Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent">1.11 Gradient Descent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-network-training">1.11 Neural Network Training</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Daniel Simon
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
