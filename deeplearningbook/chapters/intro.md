@@ -1,4 +1,4 @@
-# Mastering Deep Learning: From Neural Networks to Transformers
+<h1>Mastering Deep Learning:<br>From Neural Networks to Transformers</h1>
 
 <br>
 

@@ -3,8 +3,9 @@
 
 format: jb-book
 root: chapters/intro
+options:
+  numbered: true
 chapters:
-- file: chapters/index
 - file: chapters/ch1
 - file: chapters/ch2
 - file: chapters/references

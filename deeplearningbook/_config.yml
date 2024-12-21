@@ -3,7 +3,7 @@
 
 title: 'Mastering Deep Learning: From Neural Networks to Transformers'
 author: Daniel Simon
-logo: logo.png
+logo: images/logo.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -30,3 +30,4 @@ repository:
 html:
   home_page_in_navbar: false
   use_repository_button: true
+  extra_css: ["_static/custom.css"]
