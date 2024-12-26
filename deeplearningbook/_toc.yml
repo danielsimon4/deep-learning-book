@@ -8,4 +8,5 @@ options:
 chapters:
 - file: chapters/ch1
 - file: chapters/ch2
+- file: chapters/ch3
 - file: chapters/references

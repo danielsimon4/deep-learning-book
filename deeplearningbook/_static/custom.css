@@ -100,58 +100,69 @@ ul.nav.section-nav.flex-column {
 /* --------------- general --------------- */
 
 h2 {
-    margin-top: 110px;
-    margin-bottom: 0px;
+    margin: 100px 0 0 0;
 }
 
-#deep-learning h2 {
-    margin-top: 45px;
+#artifical-intelligence h2 {
+    margin: 50px 0 0 0;
 }
 
 h3 {
-    margin-top: 45px;
-    margin-bottom: 0px;
+    margin: 50px 0 0 0;
 }
 
 p {
-    margin-top: 25px;
-    margin-bottom: 0px;
+    margin: 25px 0 0 0;
+}
+
+.no-top-margin {
+    margin-top: 0;
+}
+
+.bottom-margin {
+    margin-bottom: 15px;
 }
 
 ul {
-    margin-top: 10px;
-    margin-bottom: 0px;
-    margin-left: 50px;
-    padding-left: 0px;
+    margin: 10px 0 0 50px;
+    padding-left: 0;
+}
+
+/* ul inside admonition */
+.admonition ul {
+    margin: 0 1.4rem 0 70px !important;
+    padding-left: 0;
 }
 
 ol {
-    margin-top: 10px;
-    margin-bottom: 0px;
-    margin-left: 50px;
-    padding-left: 0px;
+    margin: 10px 0 0 50px;
+    padding-left: 0;
 }
 
 figure {
-    margin-top: 25px;
-    margin-bottom: 0px;
+    margin: 25px 0 0 0;
+    padding: 0 !important;
+}
+
+/* math */
+mjx-container {
+    margin: 0 !important;
+}
+
+/* python cell */
+.highlight-python.notranslate {
+    margin: 10px 1.4rem 10px 70px !important;
 }
 
 /* code cells */
 .cell.docutils.container {
-    margin-top: 15px;
+    margin-top: 20px;
     margin-bottom: 35px;
 }
 
+
+/* table */
 .pst-scrollable-table-container {
     max-width: 300px;
-    margin-top: 25px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-mjx-container {
-    margin-top: 10px !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
+    margin: 30px auto 0 auto;
 }
