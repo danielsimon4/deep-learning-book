@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Deep Learing &#8212; Mastering Deep Learning: From Neural Networks to Transformers</title>
+    <title>Mean Squared Error &#8212; Mastering Deep Learning: From Neural Networks to Transformers</title>
   
   
   
@@ -63,11 +63,9 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/ch1';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/extra';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. Neural Networks" href="ch2.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -119,6 +117,8 @@
       
       
       
+        
+      
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
@@ -163,8 +163,8 @@
 </button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Deep Learing</a></li>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ch1.html">1. Deep Learing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ch2.html">2. Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ch3.html">3. Improving NNs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ch4.html">4. Image Recognition</a></li>
@@ -241,7 +241,7 @@
       
       
       
-      <li><a href="../_sources/chapters/ch1.ipynb" target="_blank"
+      <li><a href="../_sources/chapters/extra.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -317,7 +317,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Deep Learing</h1>
+    <h1>Mean Squared Error</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -327,13 +327,10 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#artifical-intelligence">1.1. Artifical Intelligence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">1.2. Machine Learning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminative-modeling">1.3. Discriminative modeling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-modeling">1.4. Generative modeling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.5. Deep Learning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch">1.6. PyTorch</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mean Squared Error</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
 </ul>
+
             </nav>
         </div>
     </div>
@@ -344,90 +341,99 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="deep-learing">
-<h1><span class="section-number">1. </span>Deep Learing<a class="headerlink" href="#deep-learing" title="Link to this heading">#</a></h1>
-<section id="artifical-intelligence">
-<h2><span class="section-number">1.1. </span>Artifical Intelligence<a class="headerlink" href="#artifical-intelligence" title="Link to this heading">#</a></h2>
-<p>        <strong>Artificial Intelligence (AI)</strong> is a branch of computer science focused on creating systems that perform tasks that require human-like intelligence, such as language comprehension, pattern recognition, problem-solving, and decision-making. AI is a broad and evolving field that encompasses numerous subfields and applications. In this book, we will focus on deep learning, an specialized area within machine learning.</p>
-<figure class="align-default" id="deep-learning">
-<a class="reference internal image-reference" href="../_images/deep-learning.png"><img alt="../_images/deep-learning.png" src="../_images/deep-learning.png" style="width: 140px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Deep Learning Overview</span><a class="headerlink" href="#deep-learning" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
+  <section id="mean-squared-error">
+<h1>Mean Squared Error<a class="headerlink" href="#mean-squared-error" title="Link to this heading">#</a></h1>
+<p>The <strong>Mean Squared Error (MSE)</strong> is a commonly used loss function for regression tasks, where the objective is to predict continuous values. MSE computes the average of the squared differences between the predicted values (<span class="math notranslate nohighlight">\(\hat{y}_i\)</span>) and actual values(<span class="math notranslate nohighlight">\(y_i\)</span>). The squaring of the errors results in larger penalties for bigger discrepancies, making MSE particularly sensitive to outliers compared to the <strong>Mean Absolute Error (MAE)</strong>, which treats all errors equally.</p>
+<p>The formulas for MSE and MAE are as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|
+\]</div>
+<p>We will first define the following targets, which are the values to which the neural network’s output should converge.</p>
+<p>We will then calculate the loss using the Mean Squared Error.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">tensor.item()</span></code> method returns the value of a single-element tensor. For more information, please refer to the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.Tensor.item.html">PyTorch documentation</a>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate loss using MSE</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="p">((</span><span class="n">h2</span> <span class="o">-</span> <span class="n">targets</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># calculate loss using MSE</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">loss</span> <span class="o">=</span> <span class="p">((</span><span class="n">h2</span> <span class="o">-</span> <span class="n">targets</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;h2&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># learning rate</span>
+
+<span class="c1"># clone for later comparison </span>
+<span class="n">old_W1</span> <span class="o">=</span> <span class="n">W1</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+<span class="n">old_W2</span> <span class="o">=</span> <span class="n">W2</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+
+<span class="c1"># update parameters using gradient descent</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">data</span> <span class="o">+=</span> <span class="o">-</span><span class="n">lr</span> <span class="o">*</span> <span class="n">p</span><span class="o">.</span><span class="n">grad</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;W1 before GD:</span><span class="se">\n</span><span class="si">{</span><span class="n">old_W1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;W1 gradients:</span><span class="se">\n</span><span class="si">{</span><span class="n">W1</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;W1 after GD:</span><span class="se">\n</span><span class="si">{</span><span class="n">W1</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;W2 before GD:</span><span class="se">\n</span><span class="si">{</span><span class="n">old_W2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;W2 gradients:</span><span class="se">\n</span><span class="si">{</span><span class="n">W2</span><span class="o">.</span><span class="n">grad</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;W2 after GD2:</span><span class="se">\n</span><span class="si">{</span><span class="n">W2</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># learning rate</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># clone for later comparison </span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">old_W1</span> <span class="o">=</span> <span class="n">W1</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">old_W2</span> <span class="o">=</span> <span class="n">W2</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># update parameters using gradient descent</span>
+
+<span class="ne">NameError</span>: name &#39;W1&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that the gradients indicate whether the values should be increased or decreased, as well as the magnitude of the adjustment.</p>
+</div>
+<p>As we can see, through gradient descent, the neural network gradually reduced its loss and improved its predictions over time. Comparing the initial output to the final output, we can observe that the final predictions are closer to the target values.</p>
 </section>
-<section id="machine-learning">
-<h2><span class="section-number">1.2. </span>Machine Learning<a class="headerlink" href="#machine-learning" title="Link to this heading">#</a></h2>
-<p><strong>Machine Learning (ML)</strong> is a subset of AI focused on creating systems, known as <strong>models</strong>, that learn patterns from data through training. The main machine learning approaches are:</p>
+<section id="bias">
+<h1>Bias<a class="headerlink" href="#bias" title="Link to this heading">#</a></h1>
+<p>As we saw in section <a class="reference internal" href="#1.3"><code class="xref myst docutils literal notranslate"><span class="pre">1.3</span></code></a>, a <strong>bias</strong> is a parameter added to the output of a neuron that enables the model to learn more complex patterns.</p>
 <ul class="simple">
-<li><p><strong>Supervised Learning</strong>: The model is trained on labeled data, meaning each training example has an associted label. The model learns to associate training examples with labels, making it well-suited for classification and regression tasks.</p></li>
-<li><p><strong>Unsupervised Learning</strong>: The model is trained on unlabeled data, meaning the training examples do not have labels. The model learns to identify hidden patterns or groupings within the data, making it well-suited for clustering and association tasks.</p></li>
-<li><p><strong>Reinforcement Learning</strong>: The model learns through rewards and penalties based on its actions, making it well-suited for environments where decision-making is complex, such as strategic games and robotics.</p></li>
+<li><p>The bias term allows the model to adjust the neuron’s output independently of its inputs, helping the model better fit the training data and capture more complex patterns.</p></li>
 </ul>
-<p>In addition to these core approaches, there are more specific modeling techniques such as discriminative modeling and generative modeling.</p>
-</section>
-<section id="discriminative-modeling">
-<h2><span class="section-number">1.3. </span>Discriminative modeling<a class="headerlink" href="#discriminative-modeling" title="Link to this heading">#</a></h2>
-<p>        <strong>Discriminative modeling</strong> uses labeled data to learn the decision boundary between different classes in the training set. These models classify input examples by estimating <span class="math notranslate nohighlight">\(P(y|x)\)</span>, the conditional probability of a class <span class="math notranslate nohighlight">\(y\)</span> given an example <span class="math notranslate nohighlight">\(x\)</span>.</p>
-<figure class="align-default" id="discriminative-model">
-<a class="reference internal image-reference" href="../_images/discriminative-model.png"><img alt="../_images/discriminative-model.png" src="../_images/discriminative-model.png" style="width: 510px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 1.2 </span><span class="caption-text">Discriminative Model</span><a class="headerlink" href="#discriminative-model" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-</section>
-<section id="generative-modeling">
-<h2><span class="section-number">1.4. </span>Generative modeling<a class="headerlink" href="#generative-modeling" title="Link to this heading">#</a></h2>
-<p>        <strong>Generative modeling</strong> uses both labeled and unlabeled data to learn the probability distribution of the training set. These models generate new samples similar to those in the training set by estimating <span class="math notranslate nohighlight">\(P(x)\)</span>, the probability of observing a given sample <span class="math notranslate nohighlight">\(x\)</span>.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Generative models are probabilistic rather than deterministic. They aim to produce diverse variations of results, rather than always generating the same output. To achieve this, generative models incorporate a random component that influences the generated samples.</p>
-</div>
-<figure class="align-default" id="generative-model">
-<a class="reference internal image-reference" href="../_images/generative-model.png"><img alt="../_images/generative-model.png" src="../_images/generative-model.png" style="width: 510px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Generative Model</span><a class="headerlink" href="#generative-model" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-</section>
-<section id="id1">
-<h2><span class="section-number">1.5. </span>Deep Learning<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<p>        <strong>Deep Learning (DL)</strong> is a specialized area within ML that uses systems with multiple layers to progressively extract features and identify intricate patterns in large datasets. <strong>Neural networks</strong>, based on this principle, have revolutionized AI by solving complex problems that traditional ML models could not handle, such as detecting a dog in an image. In addition, unlike conventional ML algorithms, neural networks do not need a feature extraction step. They learn relevant features directly from the raw data during training.</p>
-<p>        Furthermore, traditional ML models typically handle structured data,  organized in tabular form where columns represent features and rows correspond to instances. <strong>Unstructured data</strong>, such as images, text, and audio, presents unique challenges because individual elements (e.g., pixels in an image) often lack standalone meaning. For instance, the color of a single pixel does not reveal whether an image contains a dog. Additionally, factors like the dog’s position, orientation, or breed should not affect the model’s ability to identify it as a dog. Neural networks excel at generalizing patterns from unstructured data, extracting meaningful insights despite spatial dependencies and inherent granularity.</p>
-<figure class="align-default" id="unstructured-data">
-<a class="reference internal image-reference" href="../_images/unstructured-data.png"><img alt="../_images/unstructured-data.png" src="../_images/unstructured-data.png" style="width: 510px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 1.4 </span><span class="caption-text">Unstructured Data</span><a class="headerlink" href="#unstructured-data" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-</section>
-<section id="pytorch">
-<h2><span class="section-number">1.6. </span>PyTorch<a class="headerlink" href="#pytorch" title="Link to this heading">#</a></h2>
-<p>        To build our neural networks, we will use <strong>PyTorch</strong>, an open-source machine learning library widely used because of its flexibility, ease of use, and efficient computation.</p>
-<div class="admonition-pytorch-tensors admonition">
-<p class="admonition-title">PyTorch Tensors</p>
-<p>PyTorch provides <strong>tensors</strong>, which are multi-dimensional arrays optimized for GPU processing. Depending on their dimensions, we will refer to them differently:</p>
-<br>
-<p>A 1-dimensional tensor is called a <strong>vector</strong>. A vector with shape (3) would look like this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-</pre></div>
-</div>
-<br>
-<p>A 2-dimensional tensor is called a <strong>matrix</strong>. A matrix with shape (2, 3) would look like this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
-</pre></div>
-</div>
-<br>
-<p>A 3 or more dimensional tensor is called an <strong>nD tensor</strong>. A 3D tensor with shape (2, 2, 3) would look like this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tensor</span><span class="p">([[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-         <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span>
-        <span class="p">[[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
-         <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]]])</span>
-</pre></div>
-</div>
-</div>
-</section>
+<p>Bias are important for 2 main reasons:</p>
+<ol class="arabic simple">
+<li><p><strong>Flexibility</strong>: Bias introduces an extra degree of freedom that enables the network to shift the activation function, making it more flexible and capable of learning a broader range of functions. Without bias, the output of a neuron is strictly dependent on the weighted sum of its inputs.</p></li>
+<li><p><strong>Preventing Overfitting</strong>: In some cases, bias helps avoid overfitting by allowing the network to generalize better, especially in situations where the data is not perfectly centered or the output doesn’t naturally pass through the origin (zero).</p></li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">
@@ -460,24 +466,6 @@
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="intro.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="ch2.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Neural Networks</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -495,13 +483,10 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#artifical-intelligence">1.1. Artifical Intelligence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">1.2. Machine Learning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discriminative-modeling">1.3. Discriminative modeling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-modeling">1.4. Generative modeling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.5. Deep Learning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch">1.6. PyTorch</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mean Squared Error</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
 </ul>
+
   </nav></div>
 
 </div></div>

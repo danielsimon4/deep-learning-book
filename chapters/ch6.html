@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Index &#8212; Mastering Deep Learning: From Neural Networks to Transformers</title>
+    <title>6. Text Recognition &#8212; Mastering Deep Learning: From Neural Networks to Transformers</title>
   
   
   
@@ -37,6 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a0a3bb93" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -60,11 +61,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/ch6';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Chapter 1: Neural Networks" href="ch1.html" />
-    <link rel="prev" title="Mastering Deep Learning: From Neural Networks to Transformers" href="intro.html" />
+    <link rel="next" title="7. Text Generation" href="ch7.html" />
+    <link rel="prev" title="5. Image Generation" href="ch5.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -161,10 +162,14 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Index</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ch1.html">Chapter 1: Neural Networks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ch2.html">Chapter 2: Bigram Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch1.html">1. Deep Learing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch2.html">2. Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch3.html">3. Improving NNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch4.html">4. Image Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch5.html">5. Image Generation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Text Recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ch7.html">7. Text Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">8. References</a></li>
 </ul>
 
     </div>
@@ -234,7 +239,7 @@
       
       
       
-      <li><a href="../_sources/chapters/index.md" target="_blank"
+      <li><a href="../_sources/chapters/ch6.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -244,7 +249,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -308,7 +313,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Index</h1>
+    <h1>Text Recognition</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -322,26 +327,18 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="index">
-<h1>Index<a class="headerlink" href="#index" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="text-recognition">
+<h1><span class="section-number">6. </span>Text Recognition<a class="headerlink" href="#text-recognition" title="Link to this heading">#</a></h1>
 <br>
-<p><strong><a class="reference internal" href="ch1.html"><span class="std std-doc">Chapter 1: Neural Networks</span></a></strong></p>
-<ul class="simple">
-<li><p><strong><a class="reference internal" href="ch1.html#id1"><span class="std std-ref">1.1 Deep Learning</span></a></strong></p></li>
-<li><p><strong><a class="reference internal" href="ch1.html#id3"><span class="std std-ref">1.2 Neural Networks</span></a></strong></p></li>
-<li><p><strong><a class="reference internal" href="ch1.html#id4"><span class="std std-ref">1.3 Neurons</span></a></strong></p></li>
-<li><p><strong><a class="reference internal" href="ch1.html#id5"><span class="std std-ref">1.4 PyTorch</span></a></strong></p></li>
-<li><p><strong><a class="reference internal" href="ch1.html#id6"><span class="std std-ref">1.5 Understanding How Neural Networks Learn</span></a></strong></p></li>
-<li><p><strong><a class="reference internal" href="ch2.html#id3"><span class="std std-ref">1.6 Softmax</span></a></strong></p></li>
-<li><p><strong><a class="reference internal" href="ch1.html#id8"><span class="std std-ref">1.7 Loss Function</span></a></strong></p></li>
-<li><p><strong><a class="reference internal" href="ch1.html#id9"><span class="std std-ref">1.8 Mean Squared Error (MSE)</span></a></strong></p></li>
-<li><p><strong><a class="reference internal" href="ch1.html#id10"><span class="std std-ref">1.9 Backpropagation</span></a></strong></p></li>
-<li><p><strong><a class="reference internal" href="ch1.html#id11"><span class="std std-ref">1.10 Update Parameters</span></a></strong></p></li>
-<li><p><strong><a class="reference internal" href="#1.11"><code class="xref myst docutils literal notranslate"><span class="pre">1.11</span></code></a></strong></p></li>
-</ul>
-<p><strong><a class="reference internal" href="ch2.html"><span class="std std-doc">Chapter 2: Bigram Model</span></a></strong></p>
 <br>
-</section>
+<p><strong>This chapter will be available soon!</strong> 🛠️</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br></section>
 
     <script type="text/x-thebe-config">
     {
@@ -374,20 +371,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="ch5.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Mastering Deep Learning: From Neural Networks to Transformers</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Image Generation</p>
       </div>
     </a>
     <a class="right-next"
-       href="ch1.html"
+       href="ch7.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 1: Neural Networks</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Text Generation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
