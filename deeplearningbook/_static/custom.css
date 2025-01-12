@@ -1,77 +1,28 @@
 
-/* ------------ left nav bar ------------ */
+/* ------------ header ------------ */
 
-#pst-primary-sidebar {
-    max-width: 210px;
-    border-right: 1px solid #ccc;
-    padding: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.bd-header-article.d-print-none.noprint {
+    padding: 0 32px 0 32px !important;
 }
 
-.sidebar-primary-item {
-    padding: 0 !important;
+.dropdown.dropdown-download-buttons {
+    display: none !important;
 }
 
-.navbar-brand.logo {
-    padding: 16px;
-}
-
-.bd-links.bd-docs-nav {
-    margin: 0;
-}
-
-.current.nav.bd-sidenav {
-    margin: 0;
-    padding-left: 4px;
-    padding-right: 8px;
-}
-
-.sidebar-primary-item .search-button-field {
-    display: none;
-}
-
-.sidebar-primary-items__end {
-    display: none;
+.article-header-buttons .search-button__button {
+    display: inline-flex !important;
+    visibility: visible !important;
 }
 
 
+/* ------------ remove footers ------------ */
 
-
-
-
-/* ------------ right nav bar ------------ */
-
-.bd-article-container {
-    width: 100% !important;
-    max-width: none !important;
+.bd-footer-content.noprint {
+    display: none !important;
 }
 
-#pst-secondary-sidebar {
-    max-width: 240px;
-    height: 100vh;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar-secondary-item {
-    border: 0;
-    width: 100%;
-}
-
-.bd-toc-nav.page-toc {
-    margin: 0;
-}
-
-.visible.nav.section-nav.flex-column {
-    margin: 0;
-    padding: 0;
-}
-
-ul.nav.section-nav.flex-column {
-    margin: 0px;
-    padding-left: 25px;
-    display: block;
-    visibility: visible;
+.prev-next-footer.d-print-none {
+    padding: 20px 35px 20px 35px !important;
 }
 
 
@@ -89,25 +40,93 @@ ul.nav.section-nav.flex-column {
 }
 
 
-/* --------- always display search button --------- */
+/* ------------ left nav bar ------------ */
 
-.article-header-buttons .search-button__button {
-    display: inline-flex !important;
-    visibility: visible !important;
+#pst-primary-sidebar {
+    max-width: 190px;
+    margin: 0;
+    padding: 0;
+    border-right: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-primary-item {
+    padding: 0 !important;
+}
+
+.navbar-brand.logo {
+    padding: 18px;
+}
+
+.bd-links.bd-docs-nav {
+    margin: 0;
+}
+
+.nav.bd-sidenav {
+    margin: 0;
+    padding-left: 2px;
+}
+
+.reference.internal {
+    margin: 0;
+    padding: 0;
+}
+
+.toctree-l1 .reference.internal {
+    padding: 4px 16px 4px 18px;
+}
+
+.sidebar-primary-item .search-button-field {
+    display: none;
+}
+
+.sidebar-primary-items__end {
+    display: none;
 }
 
 
-/* --------------- general --------------- */
+/* ------------ right nav bar ------------ */
+
+#pst-secondary-sidebar {
+    max-width: 210px;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    border-left: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-secondary-item {
+    border: 0;
+}
+
+.visible.nav.section-nav.flex-column {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+/* --------------- article --------------- */
+
+.bd-article-container {
+    width: 100% !important;
+    max-width: none !important;
+}
+
+.bd-article {
+    padding: 24px 40px 0 40px !important;
+}
 
 h2 {
     margin: 100px 0 0 0;
 }
 
-#artifical-intelligence h2 {
-    margin: 50px 0 0 0;
+.reference.internal {
+    margin: 0;
+    padding: 0;
 }
 
-h3 {
+#artifical-intelligence h2 {
     margin: 50px 0 0 0;
 }
 
@@ -115,12 +134,25 @@ p {
     margin: 25px 0 0 0;
 }
 
-.no-top-margin {
-    margin-top: 0;
+/* p inside admonition */
+.admonition p {
+    margin-top: 15px !important;
 }
 
-.bottom-margin {
-    margin-bottom: 15px;
+/* p inside dropdown admonition */
+.dropdown.admonition.toggle.toggle-hidden p {
+    margin-top: 0 !important;
+}
+
+/* admonition title */
+p.admonition-title {
+    font-weight: bold !important;
+    margin-top: 0 !important;
+}
+
+/* p inside ul inside admonition */
+.admonition ul p {
+    margin-top: 0 !important;
 }
 
 ul {
@@ -134,14 +166,19 @@ ul {
     padding-left: 0;
 }
 
+
 ol {
     margin: 10px 0 0 50px;
     padding-left: 0;
 }
 
 figure {
-    margin: 25px 0 0 0;
+    margin: 20px 0 0 0;
     padding: 0 !important;
+}
+
+figcaption p {
+    margin-top: 5px !important;
 }
 
 /* math */
@@ -151,7 +188,7 @@ mjx-container {
 
 /* python cell */
 .highlight-python.notranslate {
-    margin: 10px 1.4rem 10px 70px !important;
+    margin: 10px 1.4rem 0 1.4rem !important;
 }
 
 /* code cells */
