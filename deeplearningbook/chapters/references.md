@@ -1,8 +1,0 @@
-# References
-
-<br>
-
-```{bibliography}
-```
-
-<br>
